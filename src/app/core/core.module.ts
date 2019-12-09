@@ -24,7 +24,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
   ],
   exports: [
     PrimengLoaderModule,
-    AuthModule
+    AuthModule,
+    FormsModule
   ],
   providers: [
     LocalStorageService,

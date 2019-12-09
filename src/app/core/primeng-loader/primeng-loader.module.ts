@@ -5,7 +5,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
 import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
-
+import {ColorPickerModule} from 'primeng/colorpicker';
 
 
 
@@ -17,7 +17,8 @@ import {MenubarModule} from 'primeng/menubar';
     AccordionModule,
     TableModule,
     MenuModule,
-    MenubarModule
+    MenubarModule,
+    ColorPickerModule
     
 
   ],
@@ -26,7 +27,8 @@ import {MenubarModule} from 'primeng/menubar';
     AccordionModule,
     TableModule,
     MenuModule,
-    MenubarModule
+    MenubarModule,
+    ColorPickerModule
   ]
 })
 export class PrimengLoaderModule { }

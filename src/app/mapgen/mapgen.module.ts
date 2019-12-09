@@ -1,17 +1,19 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapgenComponent } from './mapgen.component';
 import { MapgenRoutingModule } from './mapgen-routing.module';
 import { CoreModule } from '../core/core.module';
-import { Comp1Component } from './comp1/comp1.component';
-import { Comp2Component } from './comp2/comp2.component';
+import { EditorComponent } from './editor/editor.component';
+import { ListComponent } from './list/list.component';
+
 
 @NgModule({
-  declarations: [MapgenComponent, Comp1Component, Comp2Component],
+  declarations: [MapgenComponent, EditorComponent, ListComponent],
   imports: [
     CommonModule,
     CoreModule,
     MapgenRoutingModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MapgenModule { }

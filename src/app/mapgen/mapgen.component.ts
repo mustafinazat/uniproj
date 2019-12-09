@@ -14,33 +14,20 @@ export class MapgenComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-    {
-        label: 'Main',
-        routerLink: ['/'],
-        routerLinkActiveOptions:{exact:  true}
-       
-    },
-    {separator:true}
-    ,
-      {
-          label: 'Mapgen',
-          routerLink: ['/mapgen'],
-          routerLinkActiveOptions:{exact:  true}
-         
-      },
+
       {separator:true}
       //,
 
       ,{
-        label: 'Mapgen1',
-        routerLink: ['/mapgen/1'],
+        label: 'Все',
+        routerLink: ['/mapgen/list'],
         routerLinkActiveOptions:{exact:  true}
        
     },
 
    {
-      label: 'Mapgen2',
-      routerLink: ['/mapgen/2'],
+      label: 'Создать новый',
+      routerLink: ['/mapgen/editor/new'],
       routerLinkActiveOptions:{exact:  true}
      
   },

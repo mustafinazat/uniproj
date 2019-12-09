@@ -1,0 +1,115 @@
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group col-md-6">
+            <input type="number" class="form-control" placeholder="размер ячейки" [(ngModel)]="cell1" >
+</div>
+<div class="form-group col-md-2">
+        <p-colorPicker [(ngModel)]="color"></p-colorPicker>
+           <p style="margin-top:.5em">Selected Color: <span [ngStyle]="{'color':color}">{{color}}</span></p> 
+    </div>
+            <input type="number" class="form-control" placeholder="число столбцов" [(ngModel)]="count" (ngModelChange)="changeMass($event)">
+      
+            <input type="number" class="form-control" placeholder="размер ячейки" [(ngModel)]="cell" >
+             <button class="btn btn-primary" (click)="exportTable()" > Сделать массив</button>
+          
+     
+          
+
+    </div>
+    <div class="col-md-8">
+        <table #tref id="mytab1" class="table-bordered" (click)="changeStates()"> 
+            <tbody>
+            <tr *ngFor="let number of numbers">
+            <td *ngFor="let number of numbers" [style.height.px]="cell" [style.width.px]="cell" (mouseenter)="changecolor($event)" >
+
+                <input type="text">
+            </td> 
+          
+            </tr>
+           
+            </tbody>
+            </table>
+            
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a-scene embedded>
+            <!-- Player -->
+            <a-entity #camera camera 
+                      universal-controls
+                      kinematic-body
+                      [attr.rotation]="rotation" [attr.position] ="position"></a-entity> 
+      
+            <!-- Ground -->
+            <a-grid static-body></a-grid>
+      
+            <!-- Tower -->
+            <a-entity rotation="0 -180 -180" >
+            <a-entity *ngFor="let x of numbers" >
+                <a-entity *ngFor="let y of numbers" >
+                <a-box  *ngIf="exportArr[x][y]" id="tower"
+                [attr.color]="exportArr[x][y].color"
+                [attr.width]="5" [attr.height]="exportArr[x][y].height" [attr.depth]="5"
+                [attr.position] = "''+(x-count/2)*5+' -1.5 '+ (y-count/2)*5+''"  static-body></a-box>
+              </a-entity>
+            </a-entity>
+            </a-entity>
+           
+      
+            <!-- Ramp 
+            <a-box id="ramp"
+                   color="#39BB82"
+                   width="1" height="10" depth="18.86796"
+                   position="0 -4.04 -6.33"
+                   rotation="30 0 0"
+                   static-body></a-box>
+        -->
+            <!-- Moving platforms 
+            <a-box id="platform1"
+                   color="#39BB82"
+                   width="4" height="0.25" depth="4"
+                   position="7 0.125 -15"
+                   velocity="0 0 0"
+                   toggle-velocity="axis: z; min: -5; max: 5;"
+                   static-body></a-box>-->
+          <a-box id="platform2"
+                   color="#39BB82"
+                   width="4" height="0.25" depth="4"
+                   position="-7 0.125 -15"
+                   velocity="0 0 0"
+                   toggle-velocity="axis: y; min: 0.125; max: 100;"
+                   static-body></a-box>
+      
+            <!-- Blocks 
+            <a-box color="#39BB82"
+                   width="1" height="1" depth="1"
+                   position="15 2 0.6"
+                   dynamic-body></a-box>
+            <a-box color="#39BB82"
+                   width="1" height="1" depth="1"
+                   position="15 2 -0.6"
+                   dynamic-body></a-box>
+            <a-box color="#39BB82"
+                   width="1" height="1" depth="1"
+                   position="15 4 0"
+                   dynamic-body></a-box>
+            <a-cylinder color="#39BB82"
+                   rotation="90 0 0"
+                   position="15 2 4"
+                   dynamic-body></a-cylinder>
+            <a-sphere color="#39BB82"
+                   position="15 2 -4"
+                   dynamic-body></a-sphere>
+                  -->
+            <!-- Lighting -->
+            <a-light type="ambient" color="#bbb"></a-light>
+            <a-light color="#ccc" position="0 30 0" distance="100" intensity="0.4" type="point"></a-light>
+            <a-light color="#ccc" position="3 10 -10" distance="50" intensity="0.4" type="point"></a-light>
+          </a-scene>
+       
+</div>
+
+
+</div>

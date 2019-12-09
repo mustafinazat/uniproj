@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     {separator:true}
     ,
       {
-          label: 'Mapgen',
+          label: 'Генератор уровней',
           routerLink: ['/mapgen'],
           routerLinkActiveOptions:{exact:  true}
          
@@ -32,12 +32,7 @@ export class HeaderComponent implements OnInit {
       {separator:true}
       //,
 
-      ,{
-        label: 'MapgenInfo',
-        routerLink: ['/mapgen/info'],
-        routerLinkActiveOptions:{exact:  true}
-       
-    },
+     
       // {label: 'Open', icon: 'fa fa-download', routerLink: ['/pagename']}
       // {
       //     label: 'Edit',

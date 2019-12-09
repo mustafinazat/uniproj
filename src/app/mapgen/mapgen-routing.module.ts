@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MapgenComponent } from './mapgen.component';
-import { Comp1Component } from './comp1/comp1.component';
-import { Comp2Component } from './comp2/comp2.component';
 
+import { EditorComponent } from './editor/editor.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
     path: 'mapgen', component: MapgenComponent, children: [      
-      { path: 'info', component: MapgenComponent },
-      { path: '1', component: Comp1Component },
-      { path: '2', component: Comp2Component },
-      { path: '', redirectTo: 'info', pathMatch: 'full' },
+      { path: 'editor/new', component: EditorComponent },
+      { path: 'editor/:id', component: EditorComponent },
+      { path: 'list', component: ListComponent },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
   }
 ];

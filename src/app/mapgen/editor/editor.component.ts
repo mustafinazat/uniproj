@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild , ElementRef} from '@angular/core';
 import { Observable } from 'rxjs';
+import {SelectItem} from 'primeng/api';
+
 
 @Component({
   selector: 'app-editor',
@@ -14,24 +16,37 @@ export class EditorComponent implements OnInit {
   cell1: number = 3;
  
   
-  @ViewChild("tref", {read: ElementRef}) tref: ElementRef;
-  @ViewChild("camera", {read: ElementRef}) camera: ElementRef;
+  @ViewChild("tref", {read: ElementRef,static: false}) tref: ElementRef;
+  @ViewChild("camera", {read: ElementRef,static: false}) camera: ElementRef;
 
  
   item:Observable<any>;
-  position: string = "-2 2 -15";
-  rotation: string = "-90 90 -90";
+  edit_mode: boolean = false;
+  position: string = "-2 2 4";
+  rotation: string = "0 90 0";
   numbers:Array<any>;
   number:Array<any>;
   numbersTemp:Array<any>;
   exportArr: any[][] = [] ;
   coords: Observable<any[]>;
-  constructor() { }
+
+  types: SelectItem[];
+  selectedType: string ='wall';
+
+  constructor() { 
+    this.numbers = Array(this.count).fill(0).map((x,i)=>i);
+    this.exportArr= Array(this.count).fill(0).map((x,i)=>Array(this.count).fill(0).map((x,i)=>0));
+  }
 
   ngOnInit() {
 
-    this.numbers = Array(this.count).fill(0).map((x,i)=>i);
-    this.exportArr= Array(this.count).fill(0).map((x,i)=>Array(this.count).fill(0).map((x,i)=>0));
+    this.types = [
+      {label: 'Стена', value: 'wall'},
+      {label: 'Двигающаяся платформа', value: 'mov_platform'},
+      {label: 'Двигающися куб', value: 'mov_box'}
+  ];
+
+
 
 
     this.camera.nativeElement.addEventListener('componentchanged',  (evt) => {
@@ -66,7 +81,7 @@ y = evt.detail.newData.y;
 
 
 
-  count: number = 30;
+  count: number = 5;
   cell: number = 20;
 
 
@@ -75,39 +90,78 @@ y = evt.detail.newData.y;
 
   changeMass(e:number)
   {
+
+
     console.log(e);
     this.numbersTemp =  Array(e).fill(0).map((x,i)=>i);
     this.numbers = [...this.numbersTemp] 
+
+    this.exportArr= Array(this.count).fill(0).map((x,i)=>Array(this.count).fill(0).map((x,i)=>0));
+  
     console.log(this.tref.nativeElement);
+    console.log(this.tref.nativeElement);
+    console.log(this.numbers);
+
   }
 
   changecolor(e)
   {
+
+
  
 
-    if(this.mouseoverBool){
+    if(this.edit_mode){
 
-    console.log();
-      if(e.target.style.border == "2px solid black")
-      {
-        e.target.firstChild.value = '';
-        e.target.style.backgroundColor = '#fff';
-        e.target.style.border = "1px solid #ddd"
+
+      switch(this.selectedType) { 
+        case "wall": { 
+          if(e.target.style.border == "2px solid black")
+          {
+            e.target.firstChild.value = '';
+            e.target.style.backgroundColor = '#fff';
+            e.target.style.border = "1px solid #ddd"
+          }
+          else
+          {
+            e.target.style.backgroundColor = this.color;
+            e.target.firstChild.value = this.cell1;
+            e.target.style.border = "2px solid black"
+          }
+          
+           break; 
+        } 
+
+
+        case "mov_platform": { 
+          if(e.target.style.border == "2px solid blue")
+          {
+            e.target.firstChild.value = '';
+            e.target.style.backgroundColor = '#fff';
+            e.target.style.border = "1px solid #ddd"
+          }
+          else
+          {
+            e.target.style.backgroundColor = this.color;
+            e.target.firstChild.value = this.cell1;
+            e.target.style.border = "2px solid blue"
+          }
+          
+           break; 
+        }
+       
+        default: { 
+          
+           break; 
+        } 
       }
-      else
-      {
-        e.target.style.backgroundColor = this.color;
-        e.target.firstChild.value = this.cell1;
-        e.target.style.border = "2px solid black"
-      }
+
+   
+  
    
     }
 
   }
-  changeStates()
-  {
-    this.mouseoverBool = !this.mouseoverBool;
-  }
+ 
 
 
 
@@ -130,6 +184,16 @@ y = evt.detail.newData.y;
           case "2px solid black": { 
             this.exportArr[i][j]=
             {
+              type: 1,
+              color: row.cells[j].style.backgroundColor,
+              height: row.cells[j].firstChild.value,
+            };
+             break; 
+          } 
+          case "2px solid blue": { 
+            this.exportArr[i][j]=
+            {
+              type: 2,
               color: row.cells[j].style.backgroundColor,
               height: row.cells[j].firstChild.value,
             };

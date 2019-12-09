@@ -1,24 +1,45 @@
 <div class="row">
 
+
+       
+
+
     <div class="col-md-4">
-        <div class="form-group col-md-6">
-            <input type="number" class="form-control" placeholder="размер ячейки" [(ngModel)]="cell1" >
+
+
+            <div class="form-group">
+                    <label> Размер поля </label>
+                        <input type="number" class="form-control" placeholder="число столбцов" [(ngModel)]="count" (ngModelChange)="changeMass($event)">
+                </div>
+                
+                <div class="form-group">
+                        <label> Ширина ячейки </label>
+                        <input type="number" class="form-control" placeholder="размер ячейки" [(ngModel)]="cell" >
+                </div>
+                <div class="form-group">  
+                             <button class="btn btn-primary" (click)="exportTable()" > Сделать массив</button>
+                            </div>  
+
+<div class="row">
+            <p-selectButton [options]="types" [(ngModel)]="selectedType"></p-selectButton>
+        </div>
+        <div class="row">
+            <p-toggleButton [(ngModel)]="edit_mode" onLabel="Редактирование: ВКЛ" offLabel="Редактирование: ВЫКЛ" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'150px'}"></p-toggleButton>
+        </div>
+            <div class="form-group col-md-6">
+            <input type="number" class="form-control" placeholder="" [(ngModel)]="cell1" >
 </div>
 <div class="form-group col-md-2">
         <p-colorPicker [(ngModel)]="color"></p-colorPicker>
-           <p style="margin-top:.5em">Selected Color: <span [ngStyle]="{'color':color}">{{color}}</span></p> 
-    </div>
-            <input type="number" class="form-control" placeholder="число столбцов" [(ngModel)]="count" (ngModelChange)="changeMass($event)">
-      
-            <input type="number" class="form-control" placeholder="размер ячейки" [(ngModel)]="cell" >
-             <button class="btn btn-primary" (click)="exportTable()" > Сделать массив</button>
-          
+</div>
+
+   
      
           
 
     </div>
     <div class="col-md-8">
-        <table #tref id="mytab1" class="table-bordered" (click)="changeStates()"> 
+        <table #tref id="mytab1" class="table-bordered" (mousedown)="edit_mode = true" (mouseup)="edit_mode = false"> 
             <tbody>
             <tr *ngFor="let number of numbers">
             <td *ngFor="let number of numbers" [style.height.px]="cell" [style.width.px]="cell" (mouseenter)="changecolor($event)" >
@@ -46,13 +67,24 @@
             <a-grid static-body></a-grid>
       
             <!-- Tower -->
-            <a-entity rotation="0 -180 -180" >
+            <a-entity rotation="0 0 0" >
             <a-entity *ngFor="let x of numbers" >
                 <a-entity *ngFor="let y of numbers" >
-                <a-box  *ngIf="exportArr[x][y]" id="tower"
+                <a-box  *ngIf="exportArr[x][y] && exportArr[x][y].type == 1" id="tower"
                 [attr.color]="exportArr[x][y].color"
                 [attr.width]="5" [attr.height]="exportArr[x][y].height" [attr.depth]="5"
-                [attr.position] = "''+(x-count/2)*5+' -1.5 '+ (y-count/2)*5+''"  static-body></a-box>
+                [attr.position] = "''+(x-count/2)*5+' '+exportArr[x][y].height/2+' '+ (count/2-y)*5+''"  static-body></a-box>
+
+                <a-box  *ngIf="exportArr[x][y] && exportArr[x][y].type == 2" 
+                [attr.color]="exportArr[x][y].color"
+                [attr.width]="5" 
+                [attr.height]="0.25" 
+                [attr.depth]="5"
+                [attr.position] = "''+(x-count/2)*5+' -0.125 '+ (count/2-y)*5+''"
+                velocity="0 0 0"
+                toggle-velocity="axis: y; min: 0.125; max: 9;"
+                static-body></a-box>
+
               </a-entity>
             </a-entity>
             </a-entity>

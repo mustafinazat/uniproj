@@ -6,8 +6,8 @@ import {TableModule} from 'primeng/table';
 import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
 import {ColorPickerModule} from 'primeng/colorpicker';
-
-
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [],
@@ -18,9 +18,9 @@ import {ColorPickerModule} from 'primeng/colorpicker';
     TableModule,
     MenuModule,
     MenubarModule,
-    ColorPickerModule
-    
-
+    ColorPickerModule,
+    SelectButtonModule,
+    ToggleButtonModule
   ],
   exports: [
     TabViewModule,
@@ -28,7 +28,9 @@ import {ColorPickerModule} from 'primeng/colorpicker';
     TableModule,
     MenuModule,
     MenubarModule,
-    ColorPickerModule
+    ColorPickerModule,
+    SelectButtonModule,
+    ToggleButtonModule
   ]
 })
 export class PrimengLoaderModule { }

@@ -49,34 +49,34 @@ export class EditorComponent implements OnInit {
 
 
 
-    this.camera.nativeElement.addEventListener('componentchanged',  (evt) => {
+//     this.camera.nativeElement.addEventListener('componentchanged',  (evt) => {
 
-      if (evt.detail.name == 'position') { 
-        let y;
-      if (evt.detail.newData.y < 1)
-       { y = 2}
-       else
-       {
-y = evt.detail.newData.y;
-       }
-      this.position = evt.detail.newData.x +' ' +y +' '+ evt.detail.newData.z;
+//       if (evt.detail.name == 'position') { 
+//         let y;
+//       if (evt.detail.newData.y < 1)
+//        { y = 2}
+//        else
+//        {
+// y = evt.detail.newData.y;
+//        }
+//       this.position = evt.detail.newData.x +' ' +y +' '+ evt.detail.newData.z;
   
-       }
+//        }
 
-       if (evt.detail.name == 'rotation') { 
-        let y;
+//        if (evt.detail.name == 'rotation') { 
+//         let y;
       
-y = evt.detail.newData.y;
+// y = evt.detail.newData.y;
        
-      this.rotation = evt.detail.newData.x +' ' +y +' '+ evt.detail.newData.z;
+//       this.rotation = evt.detail.newData.x +' ' +y +' '+ evt.detail.newData.z;
    
-       }
+//        }
 
-       if (this.color == 'green'){
-       // this.socket.emit("position", [this.position,this.rotation]);
-      }
+//        if (this.color == 'green'){
+//        // this.socket.emit("position", [this.position,this.rotation]);
+//       }
 
-});
+// });
   }
 
 
@@ -212,7 +212,12 @@ y = evt.detail.newData.y;
     }
 
     console.log( this.exportArr);
-    console.log( JSON.stringify(this.exportArr));
+    let arr =  JSON.stringify(this.exportArr);
+    localStorage.setItem('massiv', arr)
+
+
+    console.log(this.exportArr)
+    console.log(this.numbers)
   }
 
 }

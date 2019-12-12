@@ -5,16 +5,21 @@ import { MapgenComponent } from './mapgen.component';
 
 import { EditorComponent } from './editor/editor.component';
 import { ListComponent } from './list/list.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
   {
-    path: 'mapgen', component: MapgenComponent, children: [      
+    path: 'level', component: MapgenComponent, children: [      
       { path: 'editor/new', component: EditorComponent },
       { path: 'editor/:id', component: EditorComponent },
       { path: 'list', component: ListComponent },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
     ]
-  }
+  },
+  {
+    path: 'level/:id', component: ViewComponent
+  },
+
 ];
 
 @NgModule({

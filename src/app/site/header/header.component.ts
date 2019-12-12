@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     ,
       {
           label: 'Генератор уровней',
-          routerLink: ['/mapgen'],
+          routerLink: ['/level'],
           routerLinkActiveOptions:{exact:  true}
          
       },

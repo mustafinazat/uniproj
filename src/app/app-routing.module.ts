@@ -4,7 +4,7 @@ import { MapgenComponent } from './mapgen/mapgen.component';
 import {IndexComponent} from './index/index.component'
 const routes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'mapgen', component: MapgenComponent },
+  { path: 'level', component: MapgenComponent },
 ];
 
 @NgModule({

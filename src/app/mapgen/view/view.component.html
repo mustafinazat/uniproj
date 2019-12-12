@@ -1,0 +1,87 @@
+
+            <a-scene>
+                <!-- Player -->
+                <a-entity #camera camera 
+                          universal-controls
+                          kinematic-body
+                          [attr.rotation]="rotation" [attr.position] ="position"></a-entity> 
+          
+                <!-- Ground -->
+                <a-grid static-body></a-grid>
+          
+                <!-- Tower -->
+                <a-entity rotation="0 0 0" >
+                <a-entity *ngFor="let x of numbers" >
+                    <a-entity *ngFor="let y of numbers" >
+                    <a-box  *ngIf="exportArr[x][y] && exportArr[x][y].type == 1" id="tower"
+                    [attr.color]="exportArr[x][y].color"
+                    [attr.width]="5" [attr.height]="exportArr[x][y].height" [attr.depth]="5"
+                    [attr.position] = "''+(x-count/2)*5+' '+exportArr[x][y].height/2+' '+ (count/2-y)*5+''"  static-body></a-box>
+    
+                    <a-box  *ngIf="exportArr[x][y] && exportArr[x][y].type == 2" 
+                    [attr.color]="exportArr[x][y].color"
+                    [attr.width]="5" 
+                    [attr.height]="0.25" 
+                    [attr.depth]="5"
+                    [attr.position] = "''+(x-count/2)*5+' -0.125 '+ (count/2-y)*5+''"
+                    velocity="0 0 0"
+                    toggle-velocity="axis: y; min: 0.125; max: 9;"
+                    static-body></a-box>
+    
+                  </a-entity>
+                </a-entity>
+                </a-entity>
+               
+          
+                <!-- Ramp 
+                <a-box id="ramp"
+                       color="#39BB82"
+                       width="1" height="10" depth="18.86796"
+                       position="0 -4.04 -6.33"
+                       rotation="30 0 0"
+                       static-body></a-box>
+            -->
+                <!-- Moving platforms 
+                <a-box id="platform1"
+                       color="#39BB82"
+                       width="4" height="0.25" depth="4"
+                       position="7 0.125 -15"
+                       velocity="0 0 0"
+                       toggle-velocity="axis: z; min: -5; max: 5;"
+                       static-body></a-box>-->
+              <a-box id="platform2"
+                       color="#39BB82"
+                       width="4" height="0.25" depth="4"
+                       position="-7 0.125 -15"
+                       velocity="0 0 0"
+                       toggle-velocity="axis: y; min: 0.125; max: 100;"
+                       static-body></a-box>
+          
+                <!-- Blocks 
+                <a-box color="#39BB82"
+                       width="1" height="1" depth="1"
+                       position="15 2 0.6"
+                       dynamic-body></a-box>
+                <a-box color="#39BB82"
+                       width="1" height="1" depth="1"
+                       position="15 2 -0.6"
+                       dynamic-body></a-box>
+                <a-box color="#39BB82"
+                       width="1" height="1" depth="1"
+                       position="15 4 0"
+                       dynamic-body></a-box>
+                <a-cylinder color="#39BB82"
+                       rotation="90 0 0"
+                       position="15 2 4"
+                       dynamic-body></a-cylinder>
+                <a-sphere color="#39BB82"
+                       position="15 2 -4"
+                       dynamic-body></a-sphere>
+                      -->
+                <!-- Lighting -->
+                <a-light type="ambient" color="#bbb"></a-light>
+                <a-light color="#ccc" position="0 30 0" distance="100" intensity="0.4" type="point"></a-light>
+                <a-light color="#ccc" position="3 10 -10" distance="50" intensity="0.4" type="point"></a-light>
+              </a-scene>
+           
+ 

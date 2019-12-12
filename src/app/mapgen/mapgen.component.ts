@@ -20,17 +20,24 @@ export class MapgenComponent implements OnInit {
 
       ,{
         label: 'Все',
-        routerLink: ['/mapgen/list'],
+        routerLink: ['./list'],
         routerLinkActiveOptions:{exact:  true}
        
     },
 
    {
       label: 'Создать новый',
-      routerLink: ['/mapgen/editor/new'],
+      routerLink: ['./editor/new'],
       routerLinkActiveOptions:{exact:  true}
      
   },
+
+  {
+    label: 'Просмотр',
+    routerLink: ['./1'],
+    routerLinkActiveOptions:{exact:  true}
+   
+},
       // {label: 'Open', icon: 'fa fa-download', routerLink: ['/pagename']}
       // {
       //     label: 'Edit',
